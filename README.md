@@ -6,8 +6,6 @@ Trouble in picking out clothing? Difficult in matching colors? Looking for a clo
 
 Closattire is an online web application where users can save their outfit information. First-time users must sign up to use the app. Once users are logged in, they will be directed to the homepage presenting a list of custom nicknames for the saved OOTD. They are able to create, delete, and modify the list stored in their accounts. When saving their OOTD, users will be asked to enter the type of clothing (eg. Shirt, Shoes, etc.), the color of the clothes, and a picture of the clothes.
 
--   display OOTD in human-wearing way?
-
 ## Data Model
 
 The application will store Users, OOTD and Clothes
@@ -64,9 +62,7 @@ localhost:3000 - Sign in page
 
 ## Site map
 
-(**TODO**: draw out a site map that shows how pages are related to each other\_)
-
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+![siteMap](documentation/SiteMap.png)
 
 ## User Stories
 
