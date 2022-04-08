@@ -10,12 +10,15 @@
     "type": "git",
     "url": "git+https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-template.git"
   },
-  "author": "",
+  "author": "hyunjun-choi",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-template/issues"
   },
   "homepage": "https://github.com/nyu-csci-ua-0467-001-002-spring-2022/final-project-template#readme",
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "express": "^4.17.3",
     "express-session": "^1.17.2",
