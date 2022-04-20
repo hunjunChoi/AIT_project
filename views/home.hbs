@@ -1,7 +1,11 @@
 {{#if user}}
-<p>
-Hi {{user.username}}. Let's go shopping!
-</p>
+    <p>
+        Hi
+        {{user.username}}. Let's go shopping!
+    </p>
 {{else}}
-<a href="/login">Login</a> or <a href="/register">Register</a> to make a your outfit closet.
+    <a href="/login">Login</a>
+    or
+    <a href="/register">Register</a>
+    to make a your outfit closet.
 {{/if}}
