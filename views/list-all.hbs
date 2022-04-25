@@ -1,6 +1,18 @@
-<h2>Grocery Lists</h2>
-{{#each lists}}
-    <ul>
-        <li><a href="/list/{{this.slug}}">{{this.name}}</a></li>
-    </ul>
-{{/each}}
+<div class="closet-container">
+    <h2>Your Closet</h2>
+    {{#each lists}}
+        <ul class="outfit-list">
+            <li class="outfit-list-item"><a
+                    class="outfit-list-item-name"
+                    href="/list/{{this.slug}}"
+                >{{this.name}}</a>
+                <a href="" class="edit">
+                    <span class="fas fa-edit"></span>
+                </a>
+                <a href="" class="remove">
+                    <span class="fas fa-times"></span>
+                </a>
+            </li>
+        </ul>
+    {{/each}}
+</div>

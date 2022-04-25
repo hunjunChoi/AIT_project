@@ -30,24 +30,33 @@ app.use((req, res, next) => {
     }
 });
 
-// enable sessions
+// enable sessions... so sessions
 const session = require("express-session");
+// after loggin in --> don't have to log back
 const sessionOptions = {
     secret: "secret cookie thang (store this elsewhere!)",
     resave: true,
     saveUninitialized: true,
 };
+// maintain authenticated session
 app.use(session(sessionOptions));
 
+// POST requests for req, login
 app.use(express.urlencoded({ extended: false }));
-// app.use(express.static(path.join(__dirname, 'public')));
 
 const staticPath = path.resolve(__dirname, "public");
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(staticPath));
 
 // passport setup
 app.use(passport.initialize());
 app.use(passport.session());
+
+// show what session has
+app.use((req, res, next) => {
+    console.log("session containes", req.session);
+    next();
+});
 
 // make user data available to all templates
 app.use((req, res, next) => {
@@ -55,6 +64,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// Mount routes on their file
 app.use("/", routes);
 app.use("/list", list);
 app.use("/list-item", listItem);

@@ -1,13 +1,15 @@
 const mongoose = require("mongoose"),
     URLSlugs = require("mongoose-url-slugs"),
     passportLocalMongoose = require("passport-local-mongoose");
+const { monitorEventLoopDelay } = require("perf_hooks");
 
 const User = new mongoose.Schema({
     // username, password
-    lists: [{ type: mongoose.Schema.Types.ObjectId, ref: "ootd" }],
+    // array of object ID
+    closets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Closet" }],
 });
 
-const Item = new mongoose.Schema(
+const Ootd = new mongoose.Schema(
     {
         name: { type: String, required: true },
         quantity: { type: Number, min: 1, required: true },
@@ -18,19 +20,28 @@ const Item = new mongoose.Schema(
     }
 );
 
-const List = new mongoose.Schema({
+const Closet = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     name: { type: String, required: true },
-    createdAt: { type: Date, required: true },
-    items: [Item],
+    createdAt: { type: Date, required: true, default: Date.now },
+    ootds: [Ootd],
 });
 
 User.plugin(passportLocalMongoose);
-List.plugin(URLSlugs("name"));
+Closet.plugin(URLSlugs("name"));
 
 mongoose.model("User", User);
-mongoose.model("List", List);
-mongoose.model("Item", Item);
+mongoose.model("Closet", Closet);
+mongoose.model("Ootd", Ootd);
+
+/* const UserSchema = mongoose.Schema({
+    username: { type: String, required: true, min: 3 },
+
+    // hash + pw
+    password: { type: String, required: true },
+});
+
+mongoose.model("User", UserSchema); */
 
 // is the environment variable, NODE_ENV, set to PRODUCTION?
 let dbconf;
@@ -51,4 +62,4 @@ if (process.env.NODE_ENV === "PRODUCTION") {
     dbconf = "mongodb://localhost/closattire";
 }
 
-mongoose.connect(dbconf);
+mongoose.connect(dbconf, { useUnifiedTopology: true });

@@ -1,7 +1,7 @@
 const express = require("express"),
     router = express.Router(),
     mongoose = require("mongoose"),
-    List = mongoose.model("List");
+    Closet = mongoose.model("Closet");
 
 const isAuthenticated = (req, res, next) => {
     if (!req.user) {
@@ -15,7 +15,7 @@ const isAuthenticated = (req, res, next) => {
 router.use(isAuthenticated);
 
 router.get("/", (req, res) => {
-    List.find(
+    Closet.find(
         { user: req.user ? req.user._id : undefined },
         (err, lists, count) => {
             res.render("list-all.hbs", { lists: lists });
@@ -29,7 +29,7 @@ router.get("/create", (req, res) => {
 
 router.post("/create", (req, res) => {
     const { name } = req.body;
-    new List({
+    new Closet({
         user: req.user._id,
         name: name,
         createdAt: Date.now(),
@@ -40,7 +40,7 @@ router.post("/create", (req, res) => {
 
 router.get("/:slug", (req, res) => {
     const { slug } = req.params;
-    List.findOne({ slug }, (err, list, count) => {
+    Closet.findOne({ slug }, (err, list, count) => {
         res.render("list-slug.hbs", {
             list,
             displayListItems: list.items.length >= 1,

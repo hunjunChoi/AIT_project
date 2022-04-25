@@ -1,7 +1,7 @@
-const mongoose = require('mongoose'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    User = mongoose.model('User');
+const mongoose = require("mongoose"),
+    passport = require("passport"),
+    LocalStrategy = require("passport-local").Strategy,
+    User = mongoose.model("User");
 
 passport.use(new LocalStrategy(User.authenticate()));
 
