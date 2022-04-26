@@ -5,8 +5,8 @@ const passport = require("passport");
 const express = require("express");
 const path = require("path");
 
-const routes = require("./routes/index");
-const list = require("./routes/list");
+const routes = require("./routes/login");
+const closet = require("./routes/closet");
 const listItem = require("./routes/list-item");
 
 const app = express();
@@ -66,7 +66,7 @@ app.use((req, res, next) => {
 
 // Mount routes on their file
 app.use("/", routes);
-app.use("/list", list);
+app.use("/closet", closet);
 app.use("/list-item", listItem);
 
 app.listen(port, function () {

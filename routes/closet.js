@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
     Closet.find(
         { user: req.user ? req.user._id : undefined },
         (err, lists, count) => {
-            res.render("list-all.hbs", { lists: lists });
+            res.render("display-closet.hbs", { lists: lists });
         }
     );
 });
