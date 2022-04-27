@@ -4,6 +4,8 @@ require("./auth");
 const passport = require("passport");
 const express = require("express");
 const path = require("path");
+// const Auth0Strategy = require("passport-auth0");
+// require("dotenv").config();
 
 const routes = require("./routes/login");
 const closet = require("./routes/closet");
@@ -32,14 +34,27 @@ app.use((req, res, next) => {
 
 // enable sessions... so sessions
 const session = require("express-session");
+
+// basic express session initialization
 // after loggin in --> don't have to log back
 const sessionOptions = {
     secret: "secret cookie thang (store this elsewhere!)",
-    resave: true,
+    resave: false,
     saveUninitialized: true,
+
+    // secret: process.env.SESSION_SECRET,
+    // cookie: {},
+    // resave: false,
+    // saveUninitialized: false,
 };
 // maintain authenticated session
 app.use(session(sessionOptions));
+
+// show what session has
+app.use((req, res, next) => {
+    console.log("session containes", req.session);
+    next();
+});
 
 // POST requests for req, login
 app.use(express.urlencoded({ extended: false }));
@@ -49,14 +64,11 @@ const staticPath = path.resolve(__dirname, "public");
 app.use(express.static(staticPath));
 
 // passport setup
+// initialize passport on every route call
 app.use(passport.initialize());
-app.use(passport.session());
 
-// show what session has
-app.use((req, res, next) => {
-    console.log("session containes", req.session);
-    next();
-});
+// passport to use express-session
+app.use(passport.session());
 
 // make user data available to all templates
 app.use((req, res, next) => {

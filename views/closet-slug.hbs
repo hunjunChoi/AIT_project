@@ -1,8 +1,9 @@
-<h2>{{list.name}}</h2>
+<h2>{{closet.name}}</h2>
 {{#if displayListItems}}
+    {{! form data sent to '/list-item/check' }}
     <form method="POST" action="/list-item/check">
         <ul id="grocery-list">
-            {{#each list.items}}
+            {{#each closet.ootds}}
                 {{#if this.checked}}
                     <li class="checked">
                         {{this.quantity}}

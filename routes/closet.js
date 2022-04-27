@@ -8,6 +8,7 @@ const isAuthenticated = (req, res, next) => {
         res.redirect("/");
         console.log("redirecting");
     } else {
+        console.log("req.user: ", req.user);
         next();
     }
 };
@@ -17,8 +18,8 @@ router.use(isAuthenticated);
 router.get("/", (req, res) => {
     Closet.find(
         { user: req.user ? req.user._id : undefined },
-        (err, lists, count) => {
-            res.render("display-closet.hbs", { lists: lists });
+        (err, closets, count) => {
+            res.render("display-closet.hbs", { closets: closets });
         }
     );
 });
@@ -33,17 +34,24 @@ router.post("/create", (req, res) => {
         user: req.user._id,
         name: name,
         createdAt: Date.now(),
-    }).save((err, list, count) => {
-        res.redirect(`/list/${list.slug}`);
+    }).save((err, closet, count) => {
+        console.log(closet.slug);
+        res.redirect(`/closet/${closet.slug}`);
     });
 });
 
 router.get("/:slug", (req, res) => {
+    console.log("req.params: ", req.params);
+
     const { slug } = req.params;
-    Closet.findOne({ slug }, (err, list, count) => {
-        res.render("list-slug.hbs", {
-            list,
-            displayListItems: list.items.length >= 1,
+
+    console.log("slug: ", { slug });
+
+    // works with Closet.plugin(URLSlugs("name"));
+    Closet.findOne({ slug }, (err, closet, count) => {
+        res.render("closet-slug.hbs", {
+            closet,
+            displayListItems: closet.ootds.length >= 1,
         });
     });
 });

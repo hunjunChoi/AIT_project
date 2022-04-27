@@ -26,17 +26,26 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-    User.register(new User({ username }), req.body.password, (err, user) => {
-        if (err) {
-            res.render("register", {
-                message: "Your registration information is not valid",
-            });
-        } else {
-            passport.authenticate("local")(req, res, function () {
-                res.redirect("/");
-            });
+    console.log("req.body: ", req.body);
+
+    // registering
+    // passport-local-mongoose function
+    User.register(
+        // do not define password in User
+        new User({ username: req.body.username }),
+        req.body.password,
+        (err, user) => {
+            if (err) {
+                res.render("register", {
+                    message: "Your registration information is not valid",
+                });
+            } else {
+                passport.authenticate("local")(req, res, function () {
+                    res.redirect("/");
+                });
+            }
         }
-    });
+    );
 });
 
 /* // TODO: Can't use argon2 on linserv
@@ -75,17 +84,33 @@ router.post("/register", async (req, res) => {
 }); */
 
 router.post("/login", (req, res, next) => {
-    passport.authenticate("local", (err, user) => {
-        if (user) {
-            req.logIn(user, (err) => {
-                res.redirect("/");
-            });
+    if (req.body.username) {
+        if (req.body.password) {
+            // passport middleware
+            passport.authenticate("local", (err, user, info) => {
+                if (user) {
+                    // Log in
+                    req.login(user, (err) => {
+                        if (err) {
+                            res.render("login", {
+                                message: err,
+                            });
+                        }
+
+                        res.redirect("/");
+                    });
+                } else {
+                    res.render("login", {
+                        message: "Your login or password is incorrect.",
+                    });
+                }
+            })(req, res, next);
         } else {
-            res.render("login", {
-                message: "Your login or password is incorrect.",
-            });
+            res.render("login", { message: "PLease provide password" });
         }
-    })(req, res, next);
+    } else {
+        res.render("login", { message: "PLease provide username" });
+    }
 });
 
 module.exports = router;

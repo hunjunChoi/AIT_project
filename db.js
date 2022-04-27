@@ -1,12 +1,20 @@
 const mongoose = require("mongoose"),
     URLSlugs = require("mongoose-url-slugs"),
+    // auto-generate hash & salt fields in DB
     passportLocalMongoose = require("passport-local-mongoose");
-const { monitorEventLoopDelay } = require("perf_hooks");
 
 const User = new mongoose.Schema({
     // username, password
+
+    // __id: ...
     // array of object ID
     closets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Closet" }],
+    // username: ...
+    // salt: ...
+    // hash: ...
+    // __v: ...
+
+    // no fields for PW
 });
 
 const Ootd = new mongoose.Schema(
@@ -21,13 +29,19 @@ const Ootd = new mongoose.Schema(
 );
 
 const Closet = new mongoose.Schema({
+    // __id: ...
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     name: { type: String, required: true },
     createdAt: { type: Date, required: true, default: Date.now },
+    // slug: ...
     ootds: [Ootd],
+    // __v: ...
 });
 
+// export User model
+// plugin for passportLocalMongoose
 User.plugin(passportLocalMongoose);
+
 Closet.plugin(URLSlugs("name"));
 
 mongoose.model("User", User);
@@ -62,4 +76,4 @@ if (process.env.NODE_ENV === "PRODUCTION") {
     dbconf = "mongodb://localhost/closattire";
 }
 
-mongoose.connect(dbconf, { useUnifiedTopology: true });
+mongoose.connect(dbconf, { useNewUrlParser: true, useUnifiedTopology: true });

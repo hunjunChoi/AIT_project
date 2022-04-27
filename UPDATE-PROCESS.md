@@ -31,7 +31,7 @@ website flow:
 
 ## Registration
 
-### Owasp
+### Owasp / Scripy
 
 ### argon2
 
@@ -40,6 +40,9 @@ website flow:
     -   https://github.com/ranisalt/node-argon2/wiki/Options
 
 ### passport
+
+-   Auth0 authentication strategy
+    -   http://www.passportjs.org/concepts/authentication/
 
 ============
 
