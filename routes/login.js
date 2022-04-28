@@ -87,24 +87,31 @@ router.post("/login", (req, res, next) => {
     if (req.body.username) {
         if (req.body.password) {
             // passport middleware
-            passport.authenticate("local", (err, user, info) => {
-                if (user) {
-                    // Log in
-                    req.login(user, (err) => {
-                        if (err) {
-                            res.render("login", {
-                                message: err,
-                            });
-                        }
+            passport.authenticate(
+                "local",
+                // if user does not authenticate --> get redirected
+                { failureRedirect: "/login" },
+                (err, user, info) => {
+                    if (user) {
+                        console.log(req.user);
 
-                        res.redirect("/");
-                    });
-                } else {
-                    res.render("login", {
-                        message: "Your login or password is incorrect.",
-                    });
+                        // Log in
+                        req.login(user, (err) => {
+                            if (err) {
+                                res.render("login", {
+                                    message: err,
+                                });
+                            }
+
+                            res.redirect("/");
+                        });
+                    } else {
+                        res.render("login", {
+                            message: "Your login or password is incorrect.",
+                        });
+                    }
                 }
-            })(req, res, next);
+            )(req, res, next);
         } else {
             res.render("login", { message: "PLease provide password" });
         }

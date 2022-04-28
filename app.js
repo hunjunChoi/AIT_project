@@ -41,6 +41,7 @@ const sessionOptions = {
     secret: "secret cookie thang (store this elsewhere!)",
     resave: false,
     saveUninitialized: true,
+    cookie: { maxAge: 60 * 60 * 1000 }, // 1 hour
 
     // secret: process.env.SESSION_SECRET,
     // cookie: {},
@@ -56,6 +57,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// body parser
 // POST requests for req, login
 app.use(express.urlencoded({ extended: false }));
 
@@ -64,6 +66,7 @@ const staticPath = path.resolve(__dirname, "public");
 app.use(express.static(staticPath));
 
 // passport setup
+// middleware to use passport with Express
 // initialize passport on every route call
 app.use(passport.initialize());
 
@@ -72,6 +75,7 @@ app.use(passport.session());
 
 // make user data available to all templates
 app.use((req, res, next) => {
+    // user data is queried & attached to req.user
     res.locals.user = req.user;
     next();
 });

@@ -5,15 +5,18 @@ const express = require("express"),
     Ootd = mongoose.model("Ootd");
 
 router.post("/create", (req, res) => {
-    const { listSlug, name, quantity } = req.body;
-    const listItem = { name, quantity };
+    const { closetSlug, type, color } = req.body;
+    const ootd = { type, color };
+
+    // debug
+    console.log("req body LIST ITEM: ", req.body);
 
     Closet.findOneAndUpdate(
-        { slug: listSlug },
-        { $push: { ootds: listItem } },
+        { slug: closetSlug },
+        { $push: { ootds: ootd } },
         (err, list, count) => {
             console.log(err);
-            res.redirect(`/list/${listSlug}`);
+            res.redirect(`/closet/${closetSlug}`);
         }
     );
 });

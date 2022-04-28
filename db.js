@@ -3,6 +3,7 @@ const mongoose = require("mongoose"),
     // auto-generate hash & salt fields in DB
     passportLocalMongoose = require("passport-local-mongoose");
 
+// TODO: reference doc vs embedded doc
 const User = new mongoose.Schema({
     // username, password
 
@@ -19,8 +20,8 @@ const User = new mongoose.Schema({
 
 const Ootd = new mongoose.Schema(
     {
-        name: { type: String, required: true },
-        quantity: { type: Number, min: 1, required: true },
+        type: { type: String, required: true },
+        color: { type: String, required: true },
         checked: { type: Boolean, default: false, required: true },
     },
     {
@@ -76,4 +77,6 @@ if (process.env.NODE_ENV === "PRODUCTION") {
     dbconf = "mongodb://localhost/closattire";
 }
 
+// useNewUrlParser --> facilitate conversions for older application
+// useUnifiedTopology --> connection management engine was upgraded
 mongoose.connect(dbconf, { useNewUrlParser: true, useUnifiedTopology: true });

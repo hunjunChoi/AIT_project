@@ -1,11 +1,31 @@
 <h2>{{message}}</h2>
 
 <form method="POST" action="">
-    <div class="form-row"><label>Username:</label>
-        <input name="username" type="text" /></div>
-    <div class="form-row"><label>Password:</label>
-        <input name="password" type="password" /></div>
-    <div class="form-row"><input type="submit" value="Login" /></div>
+    <div class="form-row">
+        {{! <label>Username:</label> }}
+        Username:
+        <br />
+        <input name="username" type="text" placeholder="Username" required />
+        <br />
+        <br />
+    </div>
+    <div class="form-row">
+        {{! <label>Password:</label> }}
+        Password:
+        <br />
+        <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+        />
+        <br />
+        <br />
+    </div>
+    <div class="form-row">
+        <input type="submit" value="Login" />
+    </div>
     <div class="form-row">Don't have an account?
-        <a href="/register">Register</a>.</div>
+        <a href="/register">Register</a>.
+    </div>
 </form>

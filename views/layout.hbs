@@ -10,12 +10,16 @@
             href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap"
             rel="stylesheet"
         />
+
+        {{! use Font Awesome }}
         <link
             rel="stylesheet"
             href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
             integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
             crossorigin="anonymous"
         />
+
+        {{! TODO: Tailwind CSS --> link output.css  }}
         <link
             rel="stylesheet"
             href="/stylesheets/style.css"
@@ -29,8 +33,13 @@
     <body>
         <style></style>
         {{! <div class="closet-container"> }}
-        <div id="wrapper">
+        {{! <div id="wrapper"> }}
+        <div class="flex justify-between items-center py-4 bg-blue-900">
+            {{! <div
+            class="max-w-md mx-auto bg-blue rounded-xl shadow-md overflow-hidden md:max-w-2xl"
+        > }}
             <div id="hd">
+                {{! user = req.session.passport.user }}
                 {{#if user}}
                     <div>Logged in as:
                         {{user.username}}
@@ -42,13 +51,14 @@
             <div id="bd">
                 {{{body}}}
             </div>
-            <div id="ft">
+            {{! <div id="ft"> }}
+            <div class="flex justify-center flex-wrap mt-4 mb-8 text-white">
                 {{#if user}}
                     <a href="/">Home</a>
                     |
-                    <a href="/closet/">Open My Closet</a>
+                    <a href="/closet/">View My Closets</a>
                     |
-                    <a href="/closet/create">Create a New List</a>
+                    <a href="/closet/create">Add a New Closet</a>
                 {{/if}}
             </div>
         </div>

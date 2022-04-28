@@ -1,9 +1,10 @@
 const express = require("express"),
     router = express.Router(),
     mongoose = require("mongoose"),
-    Closet = mongoose.model("Closet");
+    Closet = mongoose.model("Closet"),
+    connectEnsureLogin = require("connect-ensure-login");
 
-const isAuthenticated = (req, res, next) => {
+/* const isAuthenticated = (req, res, next) => {
     if (!req.user) {
         res.redirect("/");
         console.log("redirecting");
@@ -13,9 +14,9 @@ const isAuthenticated = (req, res, next) => {
     }
 };
 
-router.use(isAuthenticated);
+router.use(isAuthenticated); */
 
-router.get("/", (req, res) => {
+router.get("/", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
     Closet.find(
         { user: req.user ? req.user._id : undefined },
         (err, closets, count) => {
@@ -24,7 +25,7 @@ router.get("/", (req, res) => {
     );
 });
 
-router.get("/create", (req, res) => {
+router.get("/create", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
     res.render("list-create.hbs");
 });
 
@@ -40,18 +41,19 @@ router.post("/create", (req, res) => {
     });
 });
 
-router.get("/:slug", (req, res) => {
+// catch slugged path
+router.get("/:slug", connectEnsureLogin.ensureLoggedIn(), (req, res) => {
     console.log("req.params: ", req.params);
 
     const { slug } = req.params;
 
-    console.log("slug: ", { slug });
+    // console.log("slug: ", { slug });
 
     // works with Closet.plugin(URLSlugs("name"));
     Closet.findOne({ slug }, (err, closet, count) => {
         res.render("closet-slug.hbs", {
             closet,
-            displayListItems: closet.ootds.length >= 1,
+            displayOutfits: closet.ootds.length >= 1,
         });
     });
 });

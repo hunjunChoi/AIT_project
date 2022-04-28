@@ -31,18 +31,22 @@ website flow:
 
 ## Registration
 
-### Owasp / Scripy
+### Font
 
-### argon2
-
--   hashing
-    -   https://www.npmjs.com/package/argon2
-    -   https://github.com/ranisalt/node-argon2/wiki/Options
+-   Font Awesome (layout.hbs)
+    -   https://fontawesome.com/
 
 ### passport
 
--   Auth0 authentication strategy
-    -   http://www.passportjs.org/concepts/authentication/
+-   Used:
+    -   auth.js
+    -   app.js
+    -   login.js
+    -   closet.js
+-   References:
+    -   https://www.geeksforgeeks.org/node-js-authentication-using-passportjs-and-passport-local-mongoose/
+    -   https://heynode.com/blog/2020-04/salt-and-hash-passwords-bcrypt/
+    -   https://heynode.com/tutorial/authenticate-users-node-expressjs-and-passportjs/
 
 ============
 
@@ -55,5 +59,28 @@ website flow:
     -   https://mongoosejs.com/docs/schematypes.html
 
 -   methods
+
     -   populate
-    -   https://mongoosejs.com/docs/populate.html
+        -   https://mongoosejs.com/docs/populate.html
+
+-   References:
+    -   https://mongoosejs.com/docs/deprecations.html#the-usenewurlparser-option
+
+==============
+
+## modules used that were not introduced in class
+
+1. connect-ensure-login
+    - https://www.npmjs.com/package/connect-ensure-login (closet.js)
+
+==================
+
+# CSS Framework
+
+---
+
+## Tailwind
+
+-   https://tailwindcss.com/docs/installation/using-postcss
+-   layout.hbs
+-   https://tailwindcss.com/docs/configuration

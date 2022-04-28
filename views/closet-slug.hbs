@@ -1,35 +1,35 @@
 <h2>{{closet.name}}</h2>
-{{#if displayListItems}}
+{{#if displayOutfits}}
     {{! form data sent to '/list-item/check' }}
     <form method="POST" action="/list-item/check">
         <ul id="grocery-list">
             {{#each closet.ootds}}
                 {{#if this.checked}}
                     <li class="checked">
-                        {{this.quantity}}
+                        {{this.type}}
                         &times;
-                        {{this.name}}</li>
+                        {{this.color}}</li>
                 {{else}}
                     <li><label><input
                                 type="checkbox"
                                 name="items"
                                 value="{{this.name}}"
-                            />{{this.quantity}}
+                            />{{this.type}}
                             &times;
-                            {{this.name}}</label></li>
+                            {{this.color}}</label></li>
                 {{/if}}
 
             {{/each}}
         </ul>
-        <input type="hidden" name="listSlug" value="{{list.slug}}" />
+        <input type="hidden" name="closetSlug" value="{{closet.slug}}" />
         <input type="submit" value="Check off items" />
     </form>
 {{/if}}
 
 <form method="POST" action="/list-item/create">
-    <input type="text" class="qty" name="quantity" placeholder="qty" />
+    <input type="text" class="ootdType" name="type" placeholder="Type" />
     &times;
-    <input type="text" name="name" placeholder="item" />
-    <input type="hidden" name="listSlug" value="{{list.slug}}" />
+    <input type="text" name="color" placeholder="Color" />
+    <input type="hidden" name="closetSlug" value="{{closet.slug}}" />
     <input type="submit" value="Add to List" />
 </form>
