@@ -5,7 +5,8 @@ module.exports = {
         enabled: true,
         preserveHtmlElements: true,
     }, */
-    content: ["./views/**/*.hbs"],
+
+    content: ["./views/**/*.hbs", "./routes/**/*.js"],
     theme: {
         colors: {
             blue: "#1fb6ff",

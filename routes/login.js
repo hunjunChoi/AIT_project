@@ -4,8 +4,7 @@ const express = require("express"),
     router = express.Router(),
     passport = require("passport"),
     mongoose = require("mongoose"),
-    User = mongoose.model("User"),
-    argon2 = require("argon2");
+    User = mongoose.model("User");
 
 router.get("/logout", (req, res) => {
     req.logout();
@@ -47,41 +46,6 @@ router.post("/register", (req, res) => {
         }
     );
 });
-
-/* // TODO: Can't use argon2 on linserv
-router.post("/register", async (req, res) => {
-    const { username, password } = req.body;
-
-    // check existing user
-    const existingUser = await User.findOne({ username: username }).exec();
-    // debug
-    console.log("exsiting user", existingUser);
-
-    if (!existingUser) {
-        // hash
-        const hash = await argon2.hash(password);
-        const savedUser = await new User({
-            username: username,
-            password: hash,
-        }).save();
-
-        console.log("saved User", savedUser);
-        res.redirect("/");
-
-        //  const u = await new User({ username: username, password: hash });
-        // u.save((err, savedUser) => {
-        //     if (!err) {
-        //         console.log("saved User", savedUser);
-        //         res.redirect("/");
-        //     } else {
-        //         console.log("err", err);
-        //         res.send("Could not register");
-        //     }
-        // }); 
-        // } else {
-        res.render("register", { error: "Could not register" });
-    }
-}); */
 
 router.post("/login", (req, res, next) => {
     if (req.body.username) {

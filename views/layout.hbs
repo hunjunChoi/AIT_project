@@ -3,24 +3,17 @@
         <title></title>
         <meta charset='="UTF-8"' />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {{! TODO: Tailwind CSS --> link output.css  }}
-        <link
-            rel="stylesheet"
-            href="/public/stylesheets/style.css"
-            type="text/css"
-            media="screen"
-            title="no title"
-        />
 
+        {{! Online resource }}
         {{! <link
             href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed"
             rel="stylesheet"
         /> }}
 
-        {{! <link
+        <link
             href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap"
             rel="stylesheet"
-        /> }}
+        />
 
         {{! use Font Awesome }}
         <link
@@ -30,10 +23,22 @@
             crossorigin="anonymous"
         />
 
+        {{! TODO: Tailwind CSS --> link output.css  }}
+        <link
+            rel="stylesheet"
+            {{! href="/public/stylesheets/style.css" }}
+            href="/stylesheets/backupStyle.css"
+            type="text/css"
+            media="screen"
+            title="no title"
+        />
+
     </head>
     <body>
         <style></style>
-        <div class="flex justify-center min-h-screen items-center">
+
+        {{! tailwind testing }}
+        {{!-- <div class="flex justify-center min-h-screen items-center">
             <div class="w-1/4 p-4">
                 <div class="relative pb-[200%]">
                     <img
@@ -47,13 +52,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
+        {{! tailwind testing }}
 
-        {{! <div id="wrapper"> }}
-        <div class="flex justify-between items-center py-4 bg-blue-900">
-            {{! <div
-            class="max-w-md mx-auto bg-blue rounded-xl shadow-md overflow-hidden md:max-w-2xl"
-        > }}
+        <div id="wrapper">
+            {{! <div class="flex justify-between items-center py-4 bg-blue-900"> }}
+
             <div id="hd">
                 {{! user = req.session.passport.user }}
                 {{#if user}}
@@ -67,8 +71,8 @@
             <div id="bd">
                 {{{body}}}
             </div>
-            {{! <div id="ft"> }}
-            <div class="flex justify-center flex-wrap mt-4 mb-8 text-white">
+            <div id="ft">
+                {{! <div class="flex justify-center flex-wrap mt-4 mb-8 text-white"> }}
                 {{#if user}}
                     <a href="/">Home</a>
                     |

@@ -77,12 +77,12 @@ website flow:
 
 # CSS Framework
 
----
-
 ## Tailwind
 
+-   Attempted with all `.hbs` files
 -   https://tailwindcss.com/docs/installation/using-postcss
--   layout.hbs
 -   https://tailwindcss.com/docs/configuration
 -   https://dev.to/jumbo02/how-to-use-tailwind-css-in-an-expressjs-app-2c7c
 -   https://surfcoderepeat.com/express-tailwind
+
+*   Failed to render correctly

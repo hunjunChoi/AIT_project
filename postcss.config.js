@@ -12,8 +12,8 @@ module.exports = {
         // require("autoprefixer")(),
         require("autoprefixer"),
 
-        /* require("cssnano")({
+        require("cssnano")({
             preset: "default",
-        }), */
+        }),
     ],
 };
