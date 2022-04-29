@@ -1,15 +1,26 @@
 <html>
     <head>
         <title></title>
+        <meta charset='="UTF-8"' />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {{! TODO: Tailwind CSS --> link output.css  }}
+        <link
+            rel="stylesheet"
+            href="/public/stylesheets/style.css"
+            type="text/css"
+            media="screen"
+            title="no title"
+        />
+
         {{! <link
             href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed"
             rel="stylesheet"
         /> }}
 
-        <link
+        {{! <link
             href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap"
             rel="stylesheet"
-        />
+        /> }}
 
         {{! use Font Awesome }}
         <link
@@ -19,20 +30,25 @@
             crossorigin="anonymous"
         />
 
-        {{! TODO: Tailwind CSS --> link output.css  }}
-        <link
-            rel="stylesheet"
-            href="/stylesheets/style.css"
-            type="text/css"
-            media="screen"
-            title="no title"
-            charset="utf-8"
-        />
-        {{! <link rel='stylesheet' href='/stylesheets/style.css'> }}
     </head>
     <body>
         <style></style>
-        {{! <div class="closet-container"> }}
+        <div class="flex justify-center min-h-screen items-center">
+            <div class="w-1/4 p-4">
+                <div class="relative pb-[200%]">
+                    <img
+                        class="absolute h-full w-full object-cover rounded-lg shadow-md"
+                        {{! src="https://m.media-amazon.com/images/M/MV5BYzE5MjY1ZDgtMTkyNC00MTMyLThhMjAtZGI5OTE1NzFlZGJjXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg" }}
+                    />
+                </div>
+                <div class="px-4 -mt-8 relative z-10">
+                    <div class="bg-white p-6 shadow-xl rounded-lg">
+                        <h2>Deadpool</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{! <div id="wrapper"> }}
         <div class="flex justify-between items-center py-4 bg-blue-900">
             {{! <div

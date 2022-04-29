@@ -4,8 +4,8 @@
     "description": "The content below is an example project proposal / requirements document. Replace the text below the lines marked \"__TODO__\" with details specific to your project. Remove the \"TODO\" lines.",
     "main": "app.js",
     "scripts": {
-        "start": "npm build:css && node app.js",
-        "dev": "npm build:css && nodemon ./app,js",
+        "start": "npm run build:css && node app.js",
+        "dev": "npm run build:css && nodemon ./app,js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "build:css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/style.css"
     },

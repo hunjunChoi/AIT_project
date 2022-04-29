@@ -1,7 +1,11 @@
 module.exports = {
     // content: ["./views/*.{hbs}"],
     // "./views/*.{hbs}"
-    purge: ["./views/**/*.hbs"],
+    /* purge: {
+        enabled: true,
+        preserveHtmlElements: true,
+    }, */
+    content: ["./views/**/*.hbs"],
     theme: {
         colors: {
             blue: "#1fb6ff",
